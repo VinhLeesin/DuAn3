@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html::areas(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    Khách hàng: <input name="user" value="${param.user}"/>
+    Từ ngày: <input name="fromDate" value="${param.fromDate}" placeholder="dd/MM/yyyy"/>
+    đến ngày: <input name="toDate" value="${param.toDate}" placeholder="dd/MM/yyyy"/>
+    <button>Tìm kiếm</button>
+</form>
+<ul>
+    <th:each items="${items}" var="item">
+        <li>${item.account.fullname} - ${item.createdate}</li>
+    </th:each>
+</ul>
+</body>
+</html>

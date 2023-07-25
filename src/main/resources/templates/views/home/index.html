@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html::areas(~{::title},~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="list-unstyled row" style="height: 650px">
+                <th:block th:each="p : ${page.content}">
+                    <div class="list-item col-sm-3" style="margin-top: 20px">
+                        <div class="item-container">
+                            <img th:src="@{'/image/' + ${p.image}}" class="product-image"
+                                 style="width: 200px; height: 110px;"/>
+                            <div style="margin-top: 20px"></div>
+                            <div class="item-info">
+                                <div class="text-center">
+                                    <span class="product-name"
+                                          style="font-size: 16px;font-weight: bold;">[[${p.name}]]</span>
+                                </div>
+                                <div style="margin-top: 20px"></div>
+                                <div class="text-center">
+                                    <span class="price" style="font-size: 20px;font-weight: bold;color: red">
+                                        [[${p.price}]] ₫</span>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px"></div>
+                            <div class="card-footer p-8 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-default" th:href="@{'/detail/'+ ${p.id}}"><i
+                                            class="bi bi-eye-fill text-danger"></i></a>
+                                    <a class="btn btn-default"><i class="bi bi-cart-check-fill text-danger"></i></a>
+                                    <a class="btn btn-default"><i class="bi bi-heart-fill text-danger"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </th:block>
+            </div>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/home?page=' + 0}">First</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/home?page=' + ${page.number - 1}}">Previous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/home?page=' + ${page.number +1}}">Next</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/home?page=' + ${page.totalPages - 1}}">Last</a>
+                </li>
+            </ul>
+        </div>
+        <aside class="col-sm-2" style="margin-top: 60px">
+            <div th:replace="/layout/aside.html"></div>
+        </aside>
+    </div>
+</div>
+<footer class="row" th:insert="~{/layout/footer.html}"></footer>
+</body>
+</html>
