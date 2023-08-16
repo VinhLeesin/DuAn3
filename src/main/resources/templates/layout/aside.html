@@ -8,7 +8,7 @@
 <div class="panel panel-primary">
     <div class="list-group">
         <h3 class="text-center" >Danh Mục</h3>
-        <a class="list-group-item" th:href="@{/home}">Tất cả</a>
+        <a class="list-group-item" th:href="@{/home?page=0}">Tất cả</a>
         <a th:each="c:${categoryList}" th:href="@{|/home?id=${c.id}|}" class="list-group-item">
             [[${c.name}]]</a>
     </div>

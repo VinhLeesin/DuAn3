@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class CategoryService {
     @Autowired
-    CategoryRepo repo;
+    private CategoryRepo repo;
 
     public List<Category> getAll() {
         return repo.findAll();

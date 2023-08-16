@@ -1,11 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout.html::areas(~{::title},~{::body})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/static/css/detail.css">
 </head>
 <body>
-
+<div class="container">
+    <H1>Thông tin sản phẩm</H1>
+    <div class="row">
+        <div class="col-6">
+            <img th:src="@{'/image/' + ${product.image}}" class="product-detail-image"/>
+        </div>
+        <div class="col-6 mt-5">
+            <div class="product-detail-title">[[${product.name}]]</div>
+            <br/>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Loại sản phẩm:</td>
+                    <td>[[${product.category.name}]]</td>
+                </tr>
+                <tr>
+                    <td>Giá bán:</td>
+                    <td><b>[[${product.price}]] ₫</b></td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <a class="btn btn-secondary" th:href="@{/home}">Quay lại</a>
+            <a class="btn btn-primary" th:href="@{'/add-to-cart/'+ ${product.id}}">Thêm vào giỏ hàng</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 50px">
+    <h1>Sản phẩm tương tự</h1>
+    <div class="row justify-content-center">
+        <th:block th:each="p : ${page.content}">
+            <div class="col-sm-3" style="margin-bottom: 20px">
+                <div class="card h-100">
+                    <img th:src="@{'/image/' + ${p.image}}" class="product-image"
+                         style="width: 277px;height: 277px"/>
+                    <div class="card-body" style="margin-bottom: 20px">
+                        <div class="text-center">
+                                <span class="product-name"
+                                      style="font-size: 16px;font-weight: bold;">[[${p.name}]]</span>
+                        </div>
+                        <div class="text-center">
+                                <span class="price"
+                                      style="font-size: 20px;font-weight: bold;color: red">[[${p.price}]] ₫</span>
+                        </div>
+                    </div>
+                    <div class="card-footer p-8 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-secondary" th:href="@{'/detail/' + ${p.id}}">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary">
+                                <i class="bi bi-cart-check-fill"></i>
+                            </a>
+                            <a class="btn btn-outline-secondary">
+                                <i class="bi bi-heart-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
 </body>
 </html>
